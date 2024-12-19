@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Manrope:wght@200..800&display=swap");
 * {
   margin: 0;
@@ -10,13 +11,21 @@ html {
 }
 
 body {
+  padding: 5rem;
   font-family: "Manrope", sans-serif;
   min-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: hsl(210, 46%, 95%);
+}
+@media only screen and (max-width: 35rem) {
+  body {
+    padding: 2rem;
+    overflow: auto;
+  }
 }
 
 main {
@@ -28,6 +37,13 @@ main {
   border-radius: 1rem;
   background-color: hsl(0, 0%, 100%);
 }
+@media only screen and (max-width: 35rem) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 0;
+    height: 90vh;
+  }
+}
 
 section.left {
   width: 100%;
@@ -35,12 +51,22 @@ section.left {
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
 }
+@media only screen and (max-width: 35rem) {
+  section.left {
+    border-radius: 1rem 1rem 0 0;
+  }
+}
 section.left img {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
   transform: scale(1.5);
+}
+@media only screen and (max-width: 35rem) {
+  section.left img {
+    width: fit-content;
+  }
 }
 
 .right {
@@ -59,6 +85,11 @@ section.left img {
   align-items: center;
   flex-direction: row-reverse;
 }
+@media only screen and (max-width: 35rem) {
+  .right__bottom {
+    width: 100%;
+  }
+}
 .right__bottom .share {
   display: flex;
   gap: 1rem;
@@ -68,11 +99,95 @@ section.left img {
   cursor: pointer;
   width: 5rem;
   height: 5rem;
+  position: relative;
 }
-.right__bottom .share__icon img {
-  width: 100%;
-  height: 100%;
+.right__bottom .share__Icon {
+  width: 6rem;
+  height: 6rem;
+  background-color: hsl(210, 46%, 95%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+@media only screen and (max-width: 35rem) {
+  .right__bottom .share__Icon {
+    width: 4rem;
+    height: 4rem;
+    z-index: 3;
+  }
+}
+.right__bottom .share__Icon img {
+  width: 3rem;
+  height: 3rem;
+}
+@media only screen and (max-width: 35rem) {
+  .right__bottom .share__Icon img {
+    width: 2rem;
+    height: 2rem;
+    z-index: 4;
+  }
+}
+.right__bottom .share__Box {
+  position: absolute;
+  width: 40rem;
+  top: -12rem;
+  right: -17.5rem;
+  border-radius: 2rem;
   background-color: hsl(217, 19%, 35%);
+  padding: 3rem;
+  z-index: 1;
+}
+@media only screen and (max-width: 35rem) {
+  .right__bottom .share__Box {
+    display: block;
+    position: absolute;
+    top: -1.7rem;
+    height: 10rem;
+    right: -3rem;
+    width: 90vw;
+    border-radius: 0 0rem 2rem 2rem;
+  }
+}
+.right__bottom .share__Box::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Üçgenin kutudan ne kadar aşağıda olacağı */
+  left: 50%; /* Üçgeni yatayda ortala */
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #48556a;
+}
+@media only screen and (max-width: 35rem) {
+  .right__bottom .share__Box::after {
+    display: none;
+  }
+}
+.right__bottom .share__Box__Inner {
+  display: flex;
+  gap: 3rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.right__bottom .share__Box span {
+  font-size: 2rem;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
+  color: hsl(214, 17%, 51%);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.right__bottom .share__Box .facebook img,
+.right__bottom .share__Box .twitter img,
+.right__bottom .share__Box .pinterest img {
+  width: 3rem;
+  height: 3rem;
 }
 .right h1 {
   font-size: 3.5rem;
@@ -80,10 +195,20 @@ section.left img {
   color: hsl(217, 19%, 35%);
   margin-bottom: 2rem;
 }
+@media only screen and (max-width: 35rem) {
+  .right h1 {
+    font-size: 1.5rem;
+  }
+}
 .right p {
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: hsl(214, 17%, 51%);
   margin-bottom: 2rem;
+}
+@media only screen and (max-width: 35rem) {
+  .right p {
+    font-size: 1.4rem;
+  }
 }
 
 .author {
@@ -98,16 +223,32 @@ section.left img {
   border-radius: 50%;
   margin-right: 1rem;
 }
+@media only screen and (max-width: 35rem) {
+  .author img {
+    width: 4rem;
+    height: 4rem;
+  }
+}
 .author-info h2 {
   font-size: 1.6rem;
   font-weight: 700;
   color: hsl(217, 19%, 35%);
   margin-bottom: 0.5rem;
 }
+@media only screen and (max-width: 35rem) {
+  .author-info h2 {
+    font-size: 1.2rem;
+  }
+}
 .author-info p {
   font-size: 1.5rem;
   opacity: 0.7;
   color: hsl(214, 17%, 51%);
+}
+@media only screen and (max-width: 35rem) {
+  .author-info p {
+    font-size: 1rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

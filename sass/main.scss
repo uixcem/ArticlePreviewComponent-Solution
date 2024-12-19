@@ -14,10 +14,16 @@ html {
 }
 
 body {
+  padding: 5rem;
   font-family: $font-family-sans-serif;
   min-height: 100vh;
+  overflow: hidden;
   @include flex(column, center, center);
   background-color: $color-quaternary;
+  @include mobile {
+    padding: 2rem;
+    overflow: auto;
+  }
 }
 
 main {
@@ -28,6 +34,11 @@ main {
   gap: 2rem;
   border-radius: 1rem;
   background-color: $color-white;
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 0;
+    height: 90vh;
+  }
 }
 
 section.left {
@@ -35,6 +46,9 @@ section.left {
   overflow: hidden;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
+  @include mobile {
+    border-radius: 1rem 1rem 0 0;
+  }
 
   img {
     width: 100%;
@@ -42,6 +56,9 @@ section.left {
     display: block;
     object-fit: cover;
     transform: scale(1.5);
+    @include mobile {
+      width: fit-content;
+    }
   }
 }
 
@@ -54,6 +71,9 @@ section.left {
   &__bottom {
     display: flex;
     justify-content: space-between;
+    @include mobile {
+      width: 100%;
+    }
     width: 90%;
     align-items: center;
     flex-direction: row-reverse;
@@ -67,10 +87,93 @@ section.left {
       cursor: pointer;
       width: 5rem;
       height: 5rem;
-      &__icon img {
-        width: 100%;
-        height: 100%;
+      position: relative;
+
+      &__Icon {
+        width: 6rem;
+        height: 6rem;
+        background-color: $color-quaternary;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        @include mobile {
+          width: 4rem;
+          height: 4rem;
+          z-index: 3;
+        }
+      }
+
+      &__Icon img {
+        @include mobile {
+          width: 2rem;
+          height: 2rem;
+          z-index: 4;
+        }
+        width: 3rem;
+        height: 3rem;
+      }
+
+      &__Box {
+        position: absolute;
+        width: 40rem;
+        top: -12rem;
+        right: -17.5rem;
+        border-radius: 2rem;
         background-color: $color-primary;
+        padding: 3rem;
+        z-index: 1;
+        @include mobile {
+          display: block;
+          position: absolute;
+          top: -1.7rem;
+          height: 10rem;
+          right: -3rem;
+          width: 90vw;
+          border-radius: 0 0rem 2rem 2rem;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -10px; /* Üçgenin kutudan ne kadar aşağıda olacağı */
+          left: 50%; /* Üçgeni yatayda ortala */
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid #48556a;
+          @include mobile {
+            display: none;
+          }
+        }
+
+        &__Inner {
+          display: flex;
+          gap: 3rem;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+        }
+
+        span {
+          font-size: 2rem;
+          letter-spacing: 1rem;
+          text-transform: uppercase;
+          color: $color-secondary;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .facebook img,
+        .twitter img,
+        .pinterest img {
+          width: 3rem;
+          height: 3rem;
+        }
       }
     }
   }
@@ -80,12 +183,18 @@ section.left {
     font-weight: $font-weight-bold;
     color: $color-primary;
     margin-bottom: 2rem;
+    @include mobile {
+      font-size: 1.5rem;
+    }
   }
 
   p {
-    font-size: 1.6rem;
+    font-size: 2rem;
     color: $color-secondary;
     margin-bottom: 2rem;
+    @include mobile {
+      font-size: 1.4rem;
+    }
   }
 }
 
@@ -96,6 +205,10 @@ section.left {
     height: 6rem;
     border-radius: 50%;
     margin-right: 1rem;
+    @include mobile {
+      width: 4rem;
+      height: 4rem;
+    }
   }
 
   &-info {
@@ -104,12 +217,18 @@ section.left {
       font-weight: $font-weight-bold;
       color: $color-primary;
       margin-bottom: 0.5rem;
+      @include mobile {
+        font-size: 1.2rem;
+      }
     }
 
     p {
       font-size: 1.5rem;
       opacity: 0.7;
       color: $color-secondary;
+      @include mobile {
+        font-size: 1rem;
+      }
     }
   }
 }
