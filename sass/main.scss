@@ -14,15 +14,15 @@ html {
 }
 
 body {
-  padding: 5rem;
+  padding: 10rem;
   font-family: $font-family-sans-serif;
   min-height: 100vh;
   overflow: hidden;
   @include flex(column, center, center);
   background-color: $color-quaternary;
   @include mobile {
-    padding: 2rem;
-    overflow: auto;
+    padding: 3rem;
+    overflow-x: hidden;
   }
 }
 
@@ -31,13 +31,12 @@ main {
   max-width: 1200px;
   display: grid;
   grid-template-columns: 35% 65%;
-  gap: 2rem;
+
   border-radius: 1rem;
   background-color: $color-white;
   @include mobile {
     grid-template-columns: 1fr;
     gap: 0;
-    height: 90vh;
   }
 }
 
@@ -48,6 +47,7 @@ section.left {
   border-bottom-left-radius: 1rem;
   @include mobile {
     border-radius: 1rem 1rem 0 0;
+    overflow: hidden;
   }
 
   img {
@@ -57,7 +57,9 @@ section.left {
     object-fit: cover;
     transform: scale(1.5);
     @include mobile {
-      width: fit-content;
+      transform: scale(1);
+      transform-origin: center;
+      overflow: hidden;
     }
   }
 }
@@ -66,6 +68,11 @@ section.left {
   width: 100%;
   padding: 3rem;
   @include flex(column, flex-start, start);
+  @include mobile {
+    padding: 0rem;
+    @include flex(column, center, center);
+    gap: 0rem;
+  }
   gap: 2rem;
 
   &__bottom {
@@ -74,20 +81,48 @@ section.left {
     @include mobile {
       width: 100%;
     }
-    width: 90%;
+    width: 100%;
     align-items: center;
     flex-direction: row-reverse;
 
+    .mobileMenu {
+      display: none; // varsayılan olarak gizli
+      @include mobile {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem;
+        gap: 2rem;
+
+        span {
+          font-size: 1.4rem;
+          letter-spacing: 1rem;
+          text-transform: uppercase;
+          color: $color-secondary;
+          vertical-align: middle;
+        }
+
+        img {
+          width: 2rem;
+          height: 2rem;
+          filter: brightness(0) invert(1);
+          vertical-align: middle;
+        }
+
+        a {
+          cursor: pointer;
+          margin-left: 1rem;
+        }
+      }
+    }
+
     .share {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
       cursor: pointer;
-      width: 5rem;
+      width: 4rem;
       height: 5rem;
       position: relative;
+      @include flex(column, center, center);
 
       &__Icon {
         width: 6rem;
@@ -103,6 +138,7 @@ section.left {
           width: 4rem;
           height: 4rem;
           z-index: 3;
+          margin-right: 2rem;
         }
       }
 
@@ -117,29 +153,36 @@ section.left {
       }
 
       &__Box {
+        display: flex;
+        align-items: center;
         position: absolute;
-        width: 40rem;
-        top: -12rem;
-        right: -17.5rem;
+        vertical-align: middle;
+        width: 35rem;
+        height: 8rem;
+        top: -10rem;
+        right: -15.5rem;
         border-radius: 2rem;
         background-color: $color-primary;
-        padding: 3rem;
+        padding: 2rem;
         z-index: 1;
         @include mobile {
-          display: block;
           position: absolute;
-          top: -1.7rem;
-          height: 10rem;
-          right: -3rem;
-          width: 90vw;
-          border-radius: 0 0rem 2rem 2rem;
+          width: fit-content;
+          display: none;
+          height: 8rem;
+          top: -1rem;
+          right: -2rem;
+          background-color: $color-primary;
+          padding: 1rem;
+          z-index: 1;
+          border-radius: 0 0rem 1rem 1rem;
         }
 
         &::after {
           content: "";
           position: absolute;
-          bottom: -10px; /* Üçgenin kutudan ne kadar aşağıda olacağı */
-          left: 50%; /* Üçgeni yatayda ortala */
+          bottom: -10px;
+          left: 50%;
           transform: translateX(-50%);
           width: 0;
           height: 0;
@@ -157,6 +200,12 @@ section.left {
           flex-direction: row;
           align-items: center;
           justify-content: center;
+          @include mobile {
+            gap: 1.5rem;
+            justify-content: flex-start;
+            margin-left: 2rem;
+            margin-top: 1.5rem;
+          }
         }
 
         span {
@@ -166,6 +215,15 @@ section.left {
           color: $color-secondary;
           cursor: pointer;
           transition: all 0.3s;
+          @include mobile {
+            font-size: 1.4rem;
+          }
+        }
+
+        button {
+          background: none;
+          background: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+          border: none;
         }
 
         .facebook img,
@@ -173,6 +231,7 @@ section.left {
         .pinterest img {
           width: 3rem;
           height: 3rem;
+          filter: brightness(0) invert(1);
         }
       }
     }
@@ -184,7 +243,8 @@ section.left {
     color: $color-primary;
     margin-bottom: 2rem;
     @include mobile {
-      font-size: 1.5rem;
+      font-size: 2rem;
+      padding: 2rem 2rem 0 2rem;
     }
   }
 
@@ -194,6 +254,8 @@ section.left {
     margin-bottom: 2rem;
     @include mobile {
       font-size: 1.4rem;
+      padding: 0 2rem 2rem 2rem;
+      margin-bottom: 0;
     }
   }
 }
@@ -234,3 +296,5 @@ section.left {
 }
 
 //Fix the mobile view, add the hover effect to the share icons and the share box
+
+//color for svg icons
